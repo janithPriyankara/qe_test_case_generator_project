@@ -39,7 +39,7 @@ class LLMController:
             Generated test cases and code
         """
         try:
-            logger.info("🤖 Starting LLM test generation...")
+            logger.info("Starting LLM test generation...")
 
             # Generate tests for each function
             function_tests = []
@@ -75,7 +75,7 @@ class LLMController:
             }
 
         except Exception as e:
-            logger.error(f"Error in LLM test generation: {str(e)}")
+            logger.error("Error in LLM test generation: {}".format(str(e)))
             raise
 
     async def _generate_function_tests(

@@ -18,12 +18,12 @@ from src.config import Config
 async def setup_demo():
     """Set up and run a demonstration of the MDTD system"""
 
-    print("🚀 AI-Assisted Model-Driven Test Development (MDTD) System")
+    print("AI-Assisted Model-Driven Test Development (MDTD) System")
     print("=" * 60)
 
     # Check for API key
     if not os.getenv('OPENAI_API_KEY'):
-        print("⚠️  Warning: OPENAI_API_KEY not found in environment variables")
+        print("Warning: OPENAI_API_KEY not found in environment variables")
         print("The system will use fallback examples instead of AI generation")
         print()
 
@@ -37,19 +37,19 @@ async def setup_demo():
     example_file = Path("examples/sample_python.py")
 
     if example_file.exists():
-        print(f"📁 Analyzing: {example_file}")
+        print(f"Analyzing: {example_file}")
         print("-" * 40)
 
         # Run the analysis and test generation
         result = await engine.analyze_and_generate_tests(example_file, "html")
 
         if result['success']:
-            print("✅ Analysis and test generation completed successfully!")
+            print("Analysis and test generation completed successfully!")
             print()
 
             # Display summary
             analysis = result['analysis']
-            print(f"📊 SUMMARY:")
+            print("SUMMARY:")
             print(f"   - Functions analyzed: {len(analysis.get('functions', []))}")
             print(f"   - Classes found: {len(analysis.get('classes', []))}")
             print(f"   - Test scenarios generated: {len(result.get('scenarios', []))}")
@@ -60,7 +60,7 @@ async def setup_demo():
             output_dir = Path(f"generated_{timestamp}")
             output_dir.mkdir(exist_ok=True)
 
-            print(f"\n📁 Creating output directory: {output_dir}")
+            print(f"\nCreating output directory: {output_dir}")
 
             # Save HTML interface
             html_file = output_dir / "test_interface.html"
@@ -138,7 +138,7 @@ async def setup_demo():
                     with open(report_file, 'w', encoding='utf-8') as f:
                         json.dump(result['report'], f, indent=2, default=str)
             except Exception as e:
-                print(f"⚠️  Warning: Could not save detailed report: {str(e)}")
+                print(f"Warning: Could not save detailed report: {str(e)}")
 
                 # Create a simple summary report
                 simple_report = {
@@ -164,20 +164,20 @@ async def setup_demo():
                     json.dump(simple_report, f, indent=2, default=str)
 
             print()
-            print(f"🌐 Test interface saved to: {html_file}")
-            print(f"📊 Source analysis saved to: {analysis_file}")
-            print(f"🧪 Test scenarios saved to: {scenarios_file}")
-            print(f"🤖 Generated tests saved to: {tests_file}")
-            print(f"🌐 Web test cases saved to: {web_tests_file}")
+            print(f"Test interface saved to: {html_file}")
+            print(f"Source analysis saved to: {analysis_file}")
+            print(f"Test scenarios saved to: {scenarios_file}")
+            print(f"Generated tests saved to: {tests_file}")
+            print(f"Web test cases saved to: {web_tests_file}")
             print()
-            print(f"📂 All files are in directory: {output_dir}")
-            print(f"🌐 Open {html_file} in your browser to run the interactive tests!")
+            print(f"All files are in directory: {output_dir}")
+            print(f"Open {html_file} in your browser to run the interactive tests!")
 
         else:
-            print(f"❌ Error: {result['error']}")
+            print(f"Error: {result['error']}")
 
     else:
-        print(f"❌ Example file not found: {example_file}")
+        print(f"Example file not found: {example_file}")
 
 def main():
     """Main entry point"""
@@ -186,9 +186,9 @@ def main():
     try:
         asyncio.run(setup_demo())
     except KeyboardInterrupt:
-        print("\n⏹️  Setup interrupted by user")
+        print("\nSetup interrupted by user")
     except Exception as e:
-        print(f"❌ Setup failed: {str(e)}")
+        print(f"Setup failed: {str(e)}")
 
 if __name__ == "__main__":
     main()

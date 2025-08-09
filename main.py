@@ -56,21 +56,21 @@ class MDTDTestEngine:
             Dict containing analysis results and generated tests
         """
         try:
-            logger.info(f"🔍 Starting analysis of: {source_path}")
+            logger.info("Starting analysis of: {}".format(source_path))
 
             # Step 1: Analyze source files
             analysis_result = await self.file_analyzer.analyze(source_path)
-            logger.info(f"✅ Analysis completed. Found {len(analysis_result.get('functions', []))} functions")
+            logger.info("Analysis completed. Found {} functions".format(len(analysis_result.get('functions', []))))
 
             # Step 2: Extract test scenarios using MDTD principles
             test_scenarios = await self.extract_test_scenarios(analysis_result)
-            logger.info(f"📋 Generated {len(test_scenarios)} test scenarios")
+            logger.info("Generated {} test scenarios".format(len(test_scenarios)))
 
             # Step 3: Generate tests using LLM
             generated_tests = await self.llm_controller.generate_comprehensive_tests(
                 analysis_result, test_scenarios
             )
-            logger.info("🤖 AI test generation completed")
+            logger.info("AI test generation completed")
 
             # Step 4: Create test cases for web interface
             web_test_cases = await self.test_generator.create_web_test_cases(
@@ -98,7 +98,7 @@ class MDTDTestEngine:
             }
 
         except Exception as e:
-            logger.error(f"❌ Error in test generation: {str(e)}")
+            logger.error("Error in test generation: {}".format(str(e)))
             return {
                 'error': str(e),
                 'success': False
@@ -281,7 +281,7 @@ async def main():
 
         output_dir.mkdir(exist_ok=True)
 
-        logger.info(f"📁 Creating output directory: {output_dir}")
+        logger.info(f"Creating output directory: {output_dir}")
 
         # Save HTML interface
         html_file = output_dir / 'test_interface.html'
@@ -362,16 +362,16 @@ async def main():
             with open(summary_file, 'w', encoding='utf-8') as f:
                 json.dump(simple_report, f, indent=2, default=str)
 
-        logger.info(f"✅ Test generation completed successfully!")
-        logger.info(f"📁 Output directory: {output_dir}")
-        logger.info(f"🌐 HTML interface: {html_file}")
-        logger.info(f"📊 Analysis results: {analysis_file}")
-        logger.info(f"🧪 Test scenarios: {scenarios_file}")
-        logger.info(f"🤖 Generated tests: {tests_file}")
+        logger.info(f"Test generation completed successfully!")
+        logger.info(f"Output directory: {output_dir}")
+        logger.info(f"HTML interface: {html_file}")
+        logger.info(f"Analysis results: {analysis_file}")
+        logger.info(f"Test scenarios: {scenarios_file}")
+        logger.info(f"Generated tests: {tests_file}")
 
         return 0
     else:
-        logger.error(f"❌ Test generation failed: {result['error']}")
+        logger.error(f"Test generation failed: {result['error']}")
         return 1
 
 

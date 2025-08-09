@@ -36,7 +36,7 @@ class TestGenerator:
             Web-compatible test cases
         """
         try:
-            logger.info("🌐 Creating web test cases...")
+            logger.info("Creating web test cases...")
 
             web_tests = {
                 'test_suites': [],
@@ -74,11 +74,11 @@ class TestGenerator:
                 )
                 web_tests['test_suites'].append(security_suite)
 
-            logger.info(f"✅ Created {len(web_tests['test_suites'])} test suites")
+            logger.info("Created {} test suites".format(len(web_tests['test_suites'])))
             return web_tests
 
         except Exception as e:
-            logger.error(f"Error creating web test cases: {str(e)}")
+            logger.error("Error creating web test cases: {}".format(str(e)))
             raise
 
     async def _create_function_test_suite(self, func_test: Dict) -> Dict:

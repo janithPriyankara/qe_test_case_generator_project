@@ -30,7 +30,7 @@ class WebInterface:
             Complete HTML page as string
         """
         try:
-            logger.info("🌐 Creating HTML5 test interface...")
+            logger.info("Creating HTML5 test interface...")
 
             # Generate HTML components
             html_head = self._generate_html_head()
@@ -58,11 +58,11 @@ class WebInterface:
 </html>
 """
 
-            logger.info("✅ HTML5 interface created successfully")
+            logger.info("HTML5 interface created successfully")
             return complete_html
 
         except Exception as e:
-            logger.error(f"Error creating web interface: {str(e)}")
+            logger.error("Error creating web interface: {}".format(str(e)))
             raise
 
     def _generate_html_head(self) -> str:

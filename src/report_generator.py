@@ -29,7 +29,7 @@ class ReportGenerator:
             Comprehensive report dictionary
         """
         try:
-            logger.info("📊 Generating comprehensive test report...")
+            logger.info("Generating comprehensive test report...")
 
             report = {
                 'metadata': self._generate_metadata(),
@@ -42,11 +42,11 @@ class ReportGenerator:
                 'appendices': self._generate_appendices(data)
             }
 
-            logger.info("✅ Report generation completed")
+            logger.info("Report generation completed")
             return report
 
         except Exception as e:
-            logger.error(f"Error generating report: {str(e)}")
+            logger.error("Error generating report: {}".format(str(e)))
             raise
 
     def _generate_metadata(self) -> Dict[str, Any]:
