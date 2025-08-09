@@ -9,9 +9,11 @@ import sys
 from pathlib import Path
 from datetime import datetime
 
-# Import the test engine and configuration
-from qe_test_case_generator.engine import MDTDTestEngine
-from qe_test_case_generator.config import Config
+# Add src to path for imports
+sys.path.insert(0, str(Path(__file__).parent / 'src'))
+
+from main import MDTDTestEngine
+from src.config import Config
 
 async def setup_demo():
     """Set up and run a demonstration of the MDTD system"""

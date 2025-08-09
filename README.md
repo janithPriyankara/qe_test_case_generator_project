@@ -47,7 +47,7 @@ A Python-based system that analyzes source code in multiple programming language
 
 Analyze any source file:
 ```bash
-qe-testgen path/to/your/source_file.py
+python main.py path/to/your/source_file.py
 ```
 
 Or run the demo:
@@ -59,13 +59,13 @@ python setup_demo.py
 
 ```bash
 # Analyze Python files
-qe-testgen examples/sample_python.py
+python main.py examples/sample_python.py
 
-# Analyze Java files
-qe-testgen examples/Calculator.java
+# Analyze Java files  
+python main.py examples/Calculator.java
 
 # Analyze entire projects
-qe-testgen /path/to/your/project --output my_tests
+python main.py /path/to/your/project --output my_tests
 ```
 
 ## Generated Output
@@ -93,18 +93,17 @@ Each run creates a timestamped directory (`generated_YYYYMMDD_HHMMSS`) containin
 
 ```
 QeTestCaseGenerator/
+├── main.py                     # Main MDTD application
 ├── setup_demo.py              # Demo script
 ├── requirements.txt           # Python dependencies
 ├── README.md                  # This file
-├── qe_test_case_generator/   # Core Python modules
-│   ├── cli.py               # Command-line interface
-│   ├── engine.py            # Test generation orchestration
-│   ├── config.py            # Configuration management
-│   ├── file_analyzer.py     # Multi-language source analysis
-│   ├── llm_controller.py    # OpenAI API integration
-│   ├── test_generator.py    # HTML5 test case generation
-│   ├── web_interface.py     # Interactive web interface creation
-│   └── report_generator.py  # Comprehensive reporting
+├── src/                       # Core Python modules
+│   ├── config.py             # Configuration management
+│   ├── file_analyzer.py      # Multi-language source analysis
+│   ├── llm_controller.py     # OpenAI API integration
+│   ├── test_generator.py     # HTML5 test case generation
+│   ├── web_interface.py      # Interactive web interface creation
+│   └── report_generator.py   # Comprehensive reporting
 ├── examples/                  # Sample source files
 │   ├── sample_python.py      # Python examples
 │   └── Calculator.java       # Java examples
@@ -135,7 +134,7 @@ The system generates comprehensive test cases using proven MDTD methodologies:
 
 ## Configuration
 
-The system uses smart defaults but can be customized via `qe_test_case_generator/config.py`:
+The system uses smart defaults but can be customized via `src/config.py`:
 
 - Maximum tests per function
 - Test categories to include
