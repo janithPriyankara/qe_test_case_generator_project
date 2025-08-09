@@ -271,13 +271,16 @@ class FileAnalyzer:
 
         return_type = str(node.return_type.name) if node.return_type and hasattr(node.return_type, 'name') else 'void'
 
+        # Fix position attribute access
+        line_number = node.position.line if hasattr(node, 'position') else 0
+
         return FunctionInfo(
             name=node.name,
             parameters=parameters,
             return_type=return_type,
             docstring=None,  # Java doesn't have docstrings like Python
             complexity=1,  # Simplified for now
-            line_number=getattr(node, 'position', {}).get('line', 0) or 0,
+            line_number=line_number,
             language='java',
             visibility='public' if 'public' in (node.modifiers or []) else 'private',
             is_static='static' in (node.modifiers or [])
@@ -299,7 +302,7 @@ class FileAnalyzer:
                 attributes.append({
                     'name': declarator.name,
                     'type': str(field.type.name) if hasattr(field.type, 'name') else str(field.type),
-                    'line_number': getattr(field, 'position', {}).get('line', 0) or 0
+                    'line_number': field.position.line if hasattr(field, 'position') else 0
                 })
 
         inheritance = []
@@ -308,13 +311,16 @@ class FileAnalyzer:
         if node.implements:
             inheritance.extend([str(impl.name) for impl in node.implements])
 
+        # Fix position attribute access
+        line_number = node.position.line if hasattr(node, 'position') else 0
+
         return ClassInfo(
             name=node.name,
             methods=methods,
             attributes=attributes,
             inheritance=inheritance,
             language='java',
-            line_number=getattr(node, 'position', {}).get('line', 0) or 0
+            line_number=line_number
         )
 
     def _analyze_cpp(self, content: str, file_path: str) -> Dict[str, Any]:
